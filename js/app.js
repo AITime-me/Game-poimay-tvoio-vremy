@@ -25,6 +25,11 @@
     document.getElementById('result-phrase').textContent = result.phrase;
     currentPhrase = result.phrase;
     showScreen('screen-result');
+    requestAnimationFrame(function () {
+      if (window.Confetti) {
+        Confetti.burst();
+      }
+    });
   }
 
   function showToast(message, isError) {

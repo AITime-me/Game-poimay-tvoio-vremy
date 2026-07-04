@@ -18,26 +18,17 @@
 
     <!-- Экран 1: Старт -->
     <section id="screen-start" class="screen screen--active screen--start">
-      <div class="start-scene" aria-hidden="true">
-        <div class="start-glow start-glow--gold"></div>
-        <div class="start-glow start-glow--emerald"></div>
-        <div class="start-clock"></div>
-        <div class="start-sparkles">
-          <span class="sparkle sparkle--1"></span>
-          <span class="sparkle sparkle--2"></span>
-          <span class="sparkle sparkle--3"></span>
-          <span class="sparkle sparkle--4"></span>
-          <span class="sparkle sparkle--5"></span>
-        </div>
+      <div class="start-bg" aria-hidden="true">
         <img
-          src="assets/hero-character.png"
+          src="assets/start-bg.png"
           alt=""
-          class="start-hero"
-          width="320"
-          height="480"
+          class="start-bg__image"
+          width="430"
+          height="860"
           loading="eager"
           decoding="async"
         >
+        <div class="start-bg__overlay"></div>
       </div>
       <div class="screen__content screen__content--start">
         <h1 class="title">Поймай своё время</h1>
@@ -90,7 +81,8 @@
     </section>
 
     <!-- Экран 4: Результат -->
-    <section id="screen-result" class="screen">
+    <section id="screen-result" class="screen screen--result">
+      <canvas id="confetti-canvas" class="confetti-canvas" aria-hidden="true"></canvas>
       <div class="screen__content screen__content--result">
         <div class="result-card">
           <p class="result-label">Игра подобрала вам направление:</p>
@@ -116,6 +108,7 @@
 
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
+  <script src="js/confetti.js"></script>
   <script src="js/game.js"></script>
   <script src="js/app.js"></script>
 </body>
