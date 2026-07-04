@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#08281F">
+  <title>Поймай своё время — студия «Твоё время»</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="app">
+    <header class="header">
+      <img src="assets/logo.png" alt="Студия красоты «Твоё время»" class="logo" width="160" height="40">
+    </header>
+
+    <!-- Экран 1: Старт -->
+    <section id="screen-start" class="screen screen--active">
+      <div class="screen__content">
+        <div class="hero-glow"></div>
+        <h1 class="title">Поймай своё время</h1>
+        <p class="text">
+          Короткая мини-игра от студии красоты «Твоё время».
+        </p>
+        <p class="text">
+          Ловите уход, массаж, сияние, релакс и час для себя.<br>
+          Избегайте стресса, недосыпа, дедлайнов и фразы «запишусь потом».
+        </p>
+        <p class="text text--highlight">
+          В конце игра подберёт вам направление для записи и откроет подарок от студии.
+        </p>
+        <button type="button" class="btn btn--primary" data-action="go-rules">Начать игру</button>
+      </div>
+    </section>
+
+    <!-- Экран 2: Правила -->
+    <section id="screen-rules" class="screen">
+      <div class="screen__content">
+        <h2 class="title title--sm">Как играть</h2>
+        <div class="rules-block rules-block--good">
+          <p class="rules-label">Ловите полезные объекты:</p>
+          <p class="rules-items">уход, массаж, сияние, релакс, увлажнение, тонус, час для себя</p>
+        </div>
+        <div class="rules-block rules-block--bad">
+          <p class="rules-label">Избегайте того, что крадёт ваше время:</p>
+          <p class="rules-items">стресс, недосып, усталость, отёки, дедлайн, запишусь потом, нет времени</p>
+        </div>
+        <p class="text text--center">У вас 20–30 секунд.</p>
+        <p class="hint">Двигайте песочные часы внизу экрана пальцем</p>
+        <button type="button" class="btn btn--primary" data-action="start-game">Играть</button>
+      </div>
+    </section>
+
+    <!-- Экран 3: Игра -->
+    <section id="screen-game" class="screen screen--game">
+      <div class="game-hud">
+        <div class="hud-item">
+          <span class="hud-label">Время</span>
+          <span id="game-timer" class="hud-value">25</span>
+        </div>
+        <div class="hud-item">
+          <span class="hud-label">Счёт</span>
+          <span id="game-score" class="hud-value">0</span>
+        </div>
+      </div>
+      <canvas id="game-canvas" class="game-canvas"></canvas>
+      <div id="score-popup" class="score-popup" aria-hidden="true"></div>
+    </section>
+
+    <!-- Экран 4: Результат -->
+    <section id="screen-result" class="screen">
+      <div class="screen__content screen__content--result">
+        <div class="result-card">
+          <p class="result-label">Игра подобрала вам направление:</p>
+          <h2 id="result-direction" class="result-direction"></h2>
+          <p id="result-explanation" class="result-explanation"></p>
+
+          <div class="gift-block">
+            <p class="result-label">Подарок к записи:</p>
+            <p class="gift-value">уход для рук</p>
+          </div>
+
+          <p class="copy-hint">Чтобы сохранить результат игры, скопируйте фразу и отправьте её в сообщения студии:</p>
+          <p id="result-phrase" class="result-phrase"></p>
+
+          <div class="result-actions">
+            <button type="button" class="btn btn--secondary" id="btn-copy">Скопировать фразу</button>
+            <a href="https://vk.me/tvoiovremya" target="_blank" rel="noopener noreferrer" class="btn btn--primary" id="btn-vk">Перейти в сообщения студии</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script src="js/game.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
