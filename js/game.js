@@ -145,7 +145,7 @@
       y: -40,
       width: Math.max(80, item.label.length * 8 + 24),
       height: 32,
-      speed: 90 + Math.random() * 60,
+      speed: 74 + Math.random() * 46,
       fontSize: fontSize
     });
     lastSpawn = now;

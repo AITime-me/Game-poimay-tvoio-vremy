@@ -17,9 +17,29 @@
     </header>
 
     <!-- Экран 1: Старт -->
-    <section id="screen-start" class="screen screen--active">
-      <div class="screen__content">
-        <div class="hero-glow"></div>
+    <section id="screen-start" class="screen screen--active screen--start">
+      <div class="start-scene" aria-hidden="true">
+        <div class="start-glow start-glow--gold"></div>
+        <div class="start-glow start-glow--emerald"></div>
+        <div class="start-clock"></div>
+        <div class="start-sparkles">
+          <span class="sparkle sparkle--1"></span>
+          <span class="sparkle sparkle--2"></span>
+          <span class="sparkle sparkle--3"></span>
+          <span class="sparkle sparkle--4"></span>
+          <span class="sparkle sparkle--5"></span>
+        </div>
+        <img
+          src="assets/hero-character.png"
+          alt=""
+          class="start-hero"
+          width="320"
+          height="480"
+          loading="eager"
+          decoding="async"
+        >
+      </div>
+      <div class="screen__content screen__content--start">
         <h1 class="title">Поймай своё время</h1>
         <p class="text">
           Короткая мини-игра от студии красоты «Твоё время».
