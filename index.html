@@ -48,8 +48,32 @@
 
     <!-- Экран 2: Правила -->
     <section id="screen-rules" class="screen">
-      <div class="screen__content">
+      <div class="screen__content screen__content--rules">
         <h2 class="title title--sm">Как играть</h2>
+
+        <div class="rules-tip">
+          <div class="rules-tip__head">
+            <span class="rules-tip__icon" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M8 4h12v5l-4 4 4 4v5H8v-5l4-4-4-4V4z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+                <path d="M12 13h4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+              </svg>
+            </span>
+            <p class="rules-tip__title">Что нужно делать</p>
+          </div>
+          <p class="rules-tip__text">
+            Внизу экрана будут песочные часы. Двигайте их пальцем влево и вправо и ловите полезные слова, которые падают сверху.
+          </p>
+          <p class="rules-tip__gesture">
+            <span class="rules-tip__arrow" aria-hidden="true">←</span>
+            <span class="rules-tip__gesture-label">двигайте пальцем</span>
+            <span class="rules-tip__arrow" aria-hidden="true">→</span>
+          </p>
+          <p class="rules-tip__note">
+            Поймали уход, массаж или сияние — получили баллы. Поймали стресс или «запишусь потом» — баллы сгорели, как свободное окно в пятницу.
+          </p>
+        </div>
+
         <div class="rules-block rules-block--good">
           <p class="rules-label">Ловите полезные объекты:</p>
           <p class="rules-items">уход, массаж, сияние, релакс, увлажнение, тонус, час для себя</p>
@@ -59,7 +83,6 @@
           <p class="rules-items">стресс, недосып, усталость, отёки, дедлайн, запишусь потом, нет времени</p>
         </div>
         <p class="text text--center">У вас 20–30 секунд.</p>
-        <p class="hint">Двигайте песочные часы внизу экрана пальцем</p>
         <button type="button" class="btn btn--primary" data-action="start-game">Играть</button>
       </div>
     </section>
