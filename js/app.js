@@ -19,16 +19,107 @@
     }
   }
 
-  function onGameComplete(result) {
-    document.getElementById('result-direction').textContent = result.direction;
-    document.getElementById('result-explanation').textContent = result.explanation;
-    document.getElementById('result-phrase').textContent = result.phrase;
-    currentPhrase = result.phrase;
-    showScreen('screen-result');
+  function setGiftLoading(isLoading) {
+    var giftEl = document.getElementById('gift-value');
+    var phraseEl = document.getElementById('result-phrase');
+    if (!giftEl || !phraseEl) {
+      return;
+    }
+
+    giftEl.classList.toggle('gift-value--loading', isLoading);
+
+    if (isLoading) {
+      giftEl.textContent = '';
+      giftEl.setAttribute('aria-busy', 'true');
+      phraseEl.textContent = '';
+      currentPhrase = '';
+      return;
+    }
+
+    giftEl.removeAttribute('aria-busy');
+  }
+
+  function applyGiftToResult(gift) {
+    var giftEl = document.getElementById('gift-value');
+    if (giftEl && gift.giftName) {
+      giftEl.textContent = gift.giftName;
+    }
+
+    var phrase = gift.phrase || '';
+    document.getElementById('result-phrase').textContent = phrase;
+    currentPhrase = phrase;
+  }
+
+  function showResultCelebration() {
     requestAnimationFrame(function () {
       if (window.Confetti) {
         Confetti.burst();
       }
+    });
+  }
+
+  function persistPlaySession(payload, gift, analytics) {
+    if (!window.PlaySession || !payload) {
+      return;
+    }
+
+    PlaySession.save({
+      playId: gift.playId,
+      giftId: gift.giftId,
+      giftName: gift.giftName,
+      gameDirection: payload.gameDirection,
+      resultType: payload.resultType,
+      skinNeed: payload.skinNeed,
+      premiumLevel: payload.premiumLevel,
+      score: analytics ? analytics.score : null
+    });
+  }
+
+  function updateBookingLink() {
+    var btn = document.getElementById('btn-vk');
+    if (!btn || !window.BookingApi || !window.GiftConfig || !GiftConfig.hasBookingApi()) {
+      return;
+    }
+
+    var bookingUrl = BookingApi.getBookingUrl();
+    if (bookingUrl) {
+      btn.href = bookingUrl;
+    }
+  }
+
+  function onGameComplete(result) {
+    document.getElementById('result-direction').textContent = result.direction;
+    document.getElementById('result-explanation').textContent = result.explanation;
+
+    var payload = window.ResultAdapter ? ResultAdapter.toGiftPayload(result) : null;
+    var analytics = window.ResultAdapter ? ResultAdapter.toAnalytics(result) : null;
+    var fallbackGift = window.GiftApi
+      ? GiftApi.getFallbackGift(result)
+      : { playId: null, giftName: 'уход для рук', giftId: null, phrase: result.phrase };
+    var useGiftApi = window.GiftApi &&
+      window.GiftConfig &&
+      GiftConfig.hasGiftApi() &&
+      payload &&
+      GiftApi.hasGiftAccessFactors(payload);
+
+    showScreen('screen-result');
+
+    if (!useGiftApi) {
+      applyGiftToResult(fallbackGift);
+      persistPlaySession(payload, fallbackGift, analytics);
+      updateBookingLink();
+      showResultCelebration();
+      return;
+    }
+
+    setGiftLoading(true);
+
+    GiftApi.selectGift(payload, result).then(function (gift) {
+      setGiftLoading(false);
+      applyGiftToResult(gift);
+      persistPlaySession(payload, gift, analytics);
+      updateBookingLink();
+      showResultCelebration();
     });
   }
 

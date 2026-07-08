@@ -513,6 +513,40 @@ body {
   margin-top: 4px;
 }
 
+.gift-value--loading {
+  color: transparent;
+  position: relative;
+  min-height: 1.35em;
+}
+
+.gift-value--loading::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 56px;
+  height: 4px;
+  border-radius: 999px;
+  transform: translateY(-50%);
+  background: linear-gradient(
+    90deg,
+    rgba(198, 161, 90, 0.2) 0%,
+    rgba(198, 161, 90, 0.85) 50%,
+    rgba(198, 161, 90, 0.2) 100%
+  );
+  background-size: 200% 100%;
+  animation: gift-loading 1.1s ease-in-out infinite;
+}
+
+@keyframes gift-loading {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: -100% 0;
+  }
+}
+
 .copy-hint {
   font-size: 0.85rem;
   color: var(--taupe);
